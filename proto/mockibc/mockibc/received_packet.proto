@@ -1,0 +1,9 @@
+syntax = "proto3";
+package mockibc.mockibc;
+
+option go_package = "mockibc/x/mockibc/types";
+
+message ReceivedPacket {
+  uint64 id = 1;
+  
+}

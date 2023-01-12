@@ -1,0 +1,18 @@
+syntax = "proto3";
+package mockibc.mockibc;
+
+import "gogoproto/gogo.proto";
+import "mockibc/mockibc/params.proto";
+import "mockibc/mockibc/received_packet.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "mockibc/x/mockibc/types";
+
+// GenesisState defines the mockibc module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  string port_id = 2;
+  repeated ReceivedPacket receivedPacketList = 3 [(gogoproto.nullable) = false];
+  uint64 receivedPacketCount = 4;
+  // this line is used by starport scaffolding # genesis/proto/state
+}

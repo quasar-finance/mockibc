@@ -1,0 +1,21 @@
+syntax = "proto3";
+package mockibc.mockibc;
+
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "mockibc/x/mockibc/types";
+
+// Msg defines the Msg service.
+service Msg {
+      rpc SendAcknowledgment(MsgSendAcknowledgment) returns (MsgSendAcknowledgmentResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgSendAcknowledgment {
+  string sender = 1;
+}
+
+message MsgSendAcknowledgmentResponse {
+}
+
+// this line is used by starport scaffolding # proto/tx/message

@@ -1,0 +1,58 @@
+syntax = "proto3";
+package mockibc.mockibc;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "mockibc/mockibc/params.proto";
+import "mockibc/mockibc/received_packet.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "mockibc/x/mockibc/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/mockibc/mockibc/params";
+  }
+  // Queries a ReceivedPacket by id.
+	rpc ReceivedPacket(QueryGetReceivedPacketRequest) returns (QueryGetReceivedPacketResponse) {
+		option (google.api.http).get = "/mockibc/mockibc/received_packet/{id}";
+	}
+
+	// Queries a list of ReceivedPacket items.
+	rpc ReceivedPacketAll(QueryAllReceivedPacketRequest) returns (QueryAllReceivedPacketResponse) {
+		option (google.api.http).get = "/mockibc/mockibc/received_packet";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetReceivedPacketRequest {
+	uint64 id = 1;
+}
+
+message QueryGetReceivedPacketResponse {
+	ReceivedPacket ReceivedPacket = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllReceivedPacketRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllReceivedPacketResponse {
+	repeated ReceivedPacket ReceivedPacket = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// this line is used by starport scaffolding # 3
